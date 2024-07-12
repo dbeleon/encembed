@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 
-	"github.com/c-sto/encembed/pkg/encembed"
+	"github.com/dbeleon/encembed/pkg/encembed"
 )
 
 func main() {

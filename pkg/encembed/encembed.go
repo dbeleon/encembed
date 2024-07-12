@@ -6,6 +6,7 @@ import (
 	"encoding/base64"
 	"io"
 	"os"
+	"strings"
 	"text/template"
 
 	"filippo.io/age"
@@ -26,6 +27,7 @@ type Config struct {
 	EncryptedVarName string
 	DecryptedVarName string
 	ExternalKey      string
+	ExternalKeySlice string
 
 	Infile  string
 	Outfile string
@@ -82,6 +84,25 @@ func Embed(cfg Config, byts []byte) error {
 			return err
 		}
 		kf.WriteString(cfg.Key)
+		kf.Close()
+	}
+
+	if cfg.ExternalKeySlice != "" {
+		kf, err := os.Create(cfg.ExternalKeySlice)
+		if err != nil {
+			return err
+		}
+		var sb strings.Builder
+		sb.WriteString("var key []byte = {")
+		for i, v := range cfg.Key {
+			if i != 0 {
+				sb.WriteRune(',')
+			}
+			sb.WriteRune(' ')
+			sb.WriteByte(byte(v))
+		}
+		sb.WriteString(" }")
+		kf.WriteString(sb.String())
 		kf.Close()
 	}
 	return nil

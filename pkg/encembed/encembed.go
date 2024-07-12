@@ -59,20 +59,23 @@ func Embed(cfg Config, byts []byte) error {
 	io.Copy(w, inf)
 	w.Close()
 
-	srcf, err := os.Create(cfg.Outfile)
-	if err != nil {
-		return err
+	if len(cfg.Outfile) > 0 {
+		srcf, err := os.Create(cfg.Outfile)
+		if err != nil {
+			return err
+		}
+
+		tmp, err := template.New("encthing").Parse(tpl)
+		if err != nil {
+			return err
+		}
+		err = tmp.Execute(srcf, cfg)
+		if err != nil {
+			return err
+		}
+		srcf.Close()
 	}
 
-	tmp, err := template.New("encthing").Parse(tpl)
-	if err != nil {
-		return err
-	}
-	err = tmp.Execute(srcf, cfg)
-	if err != nil {
-		return err
-	}
-	srcf.Close()
 	if cfg.ExternalKey != "" {
 		kf, err := os.Create(cfg.ExternalKey)
 		if err != nil {

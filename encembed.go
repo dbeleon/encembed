@@ -10,7 +10,7 @@ func main() {
 	cfg := encembed.Config{} //encembedtpl{}
 	flag.StringVar(&cfg.Infile, "i", "", "input file")
 	flag.StringVar(&cfg.EmbedName, "o", "encembedded", "encrypted output file")
-	flag.StringVar(&cfg.Outfile, "srcname", "zencembed.go", "source file name to create")
+	flag.StringVar(&cfg.Outfile, "srcname", "", "source file name to create")
 	flag.StringVar(&cfg.FuncName, "funcname", "embedded", "name of function to return decrypted input file")
 	flag.StringVar(&cfg.PkgName, "pkgname", "main", "name of package for source file to output")
 	flag.StringVar(&cfg.EncryptedVarName, "encvarname", "cryptembed", "variable name for encrypted resource")

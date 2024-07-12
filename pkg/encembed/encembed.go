@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"crypto/rand"
 	"encoding/base64"
+	"fmt"
 	"io"
 	"os"
 	"strings"
@@ -93,15 +94,14 @@ func Embed(cfg Config, byts []byte) error {
 			return err
 		}
 		var sb strings.Builder
-		sb.WriteString("var key []byte = {")
+		sb.WriteString("var key []byte = []byte{")
 		for i, v := range cfg.Key {
 			if i != 0 {
-				sb.WriteRune(',')
+				sb.WriteString(", ")
 			}
-			sb.WriteRune(' ')
-			sb.WriteByte(byte(v))
+			fmt.Fprintf(&sb, "%d", byte(v))
 		}
-		sb.WriteString(" }")
+		sb.WriteRune('}')
 		kf.WriteString(sb.String())
 		kf.Close()
 	}

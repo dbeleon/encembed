@@ -1,10 +1,10 @@
 module github.com/dbeleon/encembed
 
-go 1.17
+go 1.22.1
 
 require (
 	filippo.io/age v1.2.0
-	github.com/c-sto/encembed v0.0.0-20211021084118-3213e2129290
+	github.com/dbeleon/scr v0.0.0-20240715132825-6aaed75f69c1
 )
 
 require (

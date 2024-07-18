@@ -17,7 +17,7 @@ func main() {
 	flag.StringVar(&cfg.DecryptedVarName, "decvarname", "", "variable name to use for decrypted resource (if you don't want to access it via the function)")
 	flag.StringVar(&cfg.ExternalKey, "extkey", "", "do not embed the key in the binary (writes to specified filename)")
 	flag.StringVar(&cfg.Key, "key", "", "dont generate key, use this one")
-	flag.StringVar(&cfg.ExternalKeySlice, "extkeyslice", "", "do not embed the key in the binary (writes byte slice to specified filename)")
+	flag.BoolVar(&cfg.Scramble, "scramble", false, "apply scrambler to key")
 	flag.Parse()
 
 	if cfg.ExternalKey != "" && cfg.DecryptedVarName != "" {

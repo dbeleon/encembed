@@ -7,4 +7,4 @@ func main() {
 	log.Println(string(cats))
 }
 
-//go:generate go run github.com/c-sto/encembed -i main.go -decvarname cats
+//go:generate go run github.com/dbeleon/encembed -i main.go -decvarname cats -srcname encembed.go -scramble

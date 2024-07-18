@@ -2,7 +2,7 @@
 
 Encrypt embedded resource in compiled binary using [age](https://github.com/FiloSottile/age). Meant for usage with `go generate`.
 
-This tool will generate a go source file that embeds an encrypted version of the file that is specified, and provides a function to access the plaintext content of that file. Options allow for arbitrary naming of the function, encrypted file, and optionally the ability to not include the password in the file.
+This tool will generate a go source file that embeds an encrypted version of the file that is specified, and provides a function to access the plaintext content of that file. Options allow for arbitrary naming of the function, encrypted file, scramble key and optionally the ability to not include the password in the file.
 
 ```
   -decvarname string
@@ -21,6 +21,8 @@ This tool will generate a go source file that embeds an encrypted version of the
         name of package for source file to output (default "main")
   -srcname string
         source file name to create (default "zencembed.go")
+  -scramble
+        scramble the key with random scrambler, descramble func places to source file
 ```
 
 Examples can be found in the example dir, but basic usage to replace your original embed is:
